@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Para mi güerita 🌼</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:100%;height:100%;overflow:hidden}
+body{font-family:Georgia,"Times New Roman",serif;background:#090601;color:#fff}
+.inicio{position:fixed;inset:0;z-index:100;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:25px;background:radial-gradient(circle at 50% 35%,rgba(255,214,74,.18),transparent 28%),linear-gradient(#180f01,#060400);transition:opacity 1.2s,visibility 1.2s}
+.inicio.oculto{opacity:0;visibility:hidden}
+.inicio h1{font-size:clamp(2.5rem,10vw,5.5rem);color:#ffd84a;text-shadow:0 0 12px #ffd54f,0 0 40px rgba(255,193,7,.4);margin-bottom:15px}
+.inicio p{font-size:clamp(1rem,3vw,1.3rem);color:#fff2c2;max-width:650px;line-height:1.6;margin-bottom:30px}
+.boton,.control{border:1px solid rgba(255,215,64,.45);border-radius:999px;cursor:pointer}
+.boton{padding:16px 32px;background:linear-gradient(135deg,#ffe26d,#ffb300);color:#4c3200;font-weight:bold;font-size:1.05rem;box-shadow:0 0 30px rgba(255,193,7,.35);animation:pulse 2s infinite}
+.jardin{position:fixed;inset:0;opacity:0;transition:opacity 1.3s}.jardin.visible{opacity:1}
+.cielo{position:absolute;inset:0;background:radial-gradient(circle at 50% 23%,rgba(255,220,100,.17),transparent 25%),linear-gradient(#181103 0%,#342205 60%,#080601 100%)}
+.luna{position:absolute;right:9%;top:8%;width:75px;height:75px;border-radius:50%;background:#fff4b5;box-shadow:0 0 45px rgba(255,235,150,.55)}
+.estrella{position:absolute;width:3px;height:3px;border-radius:50%;background:#fff;box-shadow:0 0 8px #fff;animation:twinkle 2s infinite alternate}
+.jardin-floral{position:absolute;inset:auto 0 0;height:72%;overflow:hidden}
+.gerbera{position:absolute;bottom:18%;width:clamp(95px,14vw,175px);transform-origin:center bottom;animation:sway 4s ease-in-out infinite;filter:drop-shadow(0 8px 9px rgba(0,0,0,.35))}
+.gerbera img{display:block;width:100%;height:auto}
+.tallo{position:absolute;left:49%;bottom:-42%;width:7px;height:48%;border-radius:20px;background:linear-gradient(90deg,#174819,#6ba52d,#174819);z-index:-1}
+.hoja{position:absolute;width:55px;height:23px;background:linear-gradient(135deg,#75ad35,#2c681e);border-radius:100% 0 100% 0}
+.carta{position:absolute;z-index:30;left:50%;top:50%;width:min(90%,650px);max-height:76vh;overflow:auto;transform:translate(-50%,-50%) scale(.82);opacity:0;padding:32px 30px;border-radius:25px;background:rgba(30,20,3,.88);border:1px solid rgba(255,215,64,.4);box-shadow:0 0 50px rgba(255,193,7,.17);backdrop-filter:blur(12px);transition:1.2s;text-align:center}
+.carta.visible{opacity:1;transform:translate(-50%,-50%) scale(1)}
+.carta h2{color:#ffd84a;font-size:2.1rem;margin-bottom:18px}
+.carta p{color:#fff7d9;font-size:1.03rem;line-height:1.75;margin-bottom:14px}
+.firma{color:#ffd84a!important;font-size:1.25rem!important;font-style:italic;margin-top:22px}
+.controles{position:absolute;z-index:60;left:50%;bottom:22px;transform:translateX(-50%);display:flex;gap:10px}
+.control{padding:11px 18px;color:#ffe8a0;background:rgba(25,17,3,.72);backdrop-filter:blur(8px)}
+.estado{position:fixed;z-index:60;top:18px;left:50%;transform:translateX(-50%);padding:7px 14px;border-radius:20px;background:rgba(20,12,1,.55);color:#fff0b0;font-size:.88rem}
+.corazon{position:fixed;z-index:40;bottom:-30px;color:#ffd84a;pointer-events:none;animation:rise linear forwards}
+@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.045)}}
+@keyframes twinkle{from{opacity:.2}to{opacity:1}}
+@keyframes sway{0%,100%{transform:rotate(-1deg)}50%{transform:rotate(1.5deg)}}
+@keyframes rise{from{transform:translateY(0) rotate(0);opacity:0}10%{opacity:1}to{transform:translateY(-110vh) rotate(300deg);opacity:0}}
+@media(max-width:600px){.luna{width:52px;height:52px}.jardin-floral{height:63%}.carta{width:88%;padding:25px 20px;max-height:72vh}.carta p{font-size:.96rem;line-height:1.68}}
+</style>
+</head>
+<body>
+
+<section class="inicio" id="inicio">
+<h1>Para mi güerita 🌼</h1>
+<p>Mi osita, hice esto para recordarte cuánto te amo y cuánto quiero verte feliz.</p>
+<button class="boton" onclick="comenzar()">Abrir mi regalo 💛</button>
+</section>
+
+<main class="jardin" id="jardin">
+<div class="cielo"></div><div class="luna"></div>
+<div id="estrellas"></div>
+<div class="estado" id="estado">🎵 Hermoso Cariño</div>
+<audio id="audio" preload="auto" loop>
+  <source src="hermoso-carino.mp3" type="audio/mpeg">
+</audio>
+
+<div class="jardin-floral" id="jardinFloral"></div>
+
+<article class="carta" id="carta">
+<h2>Para mi güerita 💛</h2>
+<p>Quizás estas flores sean virtuales, pero todo lo que siento por ti es completamente real.</p>
+<p>Quiero que en cada fecha importante, en cada momento especial y también en esos días que parecen normales, recuerdes que hay alguien que piensa en ti, que te quiere y que desea verte feliz.</p>
+<p>Te amo, Barbara. ❤️</p>
+<p>Quiero seguir encontrando maneras de hacerte sonreír, de sorprenderte y de demostrarte lo importante que eres para mí. No quiero que solamente las fechas especiales sean una razón para decirte cuánto te amo; quiero que cada día puedas sentirlo de alguna manera.</p>
+<p>Estas flores son pequeñas comparadas con todo lo que quisiera darte, pero llevan conmigo una intención muy grande: recordarte que, aunque a veces estemos lejos, <strong>yo quiero estar presente en tu vida y acompañarte en cada momento que pueda.</strong></p>
+<p>Quiero hacerte feliz, mi osita. Hoy, mañana y en cada fecha que tengamos para celebrar juntos. 🌼</p>
+<p class="firma">Te amo muchísimo, mi güerita. ❤️</p>
+</article>
+
+<div class="controles">
+<button class="control" onclick="mostrarCarta()">💌 Mi carta</button>
+<button class="control" id="audioBtn" onclick="toggleAudio()">⏸️ Pausar</button>
+</div>
+</main>
+
+<script>
+function comenzar(){
+  const audio=document.getElementById("audio");
+  audio.volume=.72;
+  audio.play().then(()=>{
+    document.getElementById("estado").textContent="🎵 Reproduciendo Hermoso Cariño";
+  }).catch(()=>{
+    document.getElementById("estado").textContent="🎵 Pulsa el botón de música";
+  });
+
+  document.getElementById("inicio").classList.add("oculto");
+  setTimeout(()=>{
+    document.getElementById("jardin").classList.add("visible");
+    crearEstrellas();
+    crearGerberas();
+    crearCorazones();
+  },400);
+  setTimeout(()=>document.getElementById("carta").classList.add("visible"),3000);
+}
+
+function crearEstrellas(){
+  const c=document.getElementById("estrellas");
+  for(let i=0;i<70;i++){
+    const e=document.createElement("div");
+    e.className="estrella";
+    e.style.left=Math.random()*100+"%";
+    e.style.top=Math.random()*65+"%";
+    e.style.animationDelay=Math.random()*3+"s";
+    c.appendChild(e);
+  }
+}
+
+function crearGerberas(){
+  const c=document.getElementById("jardinFloral");
+  const n=window.innerWidth<600?16:28;
+  for(let i=0;i<n;i++){
+    const f=document.createElement("div");
+    f.className="gerbera";
+    f.style.left=(Math.random()*100-5)+"%";
+    f.style.width=(82+Math.random()*62)+"px";
+    f.style.bottom=(15+Math.random()*28)+"%";
+    f.style.animationDelay=Math.random()*3+"s";
+    const img=document.createElement("img");
+    img.src="gerbera.png";
+    img.alt="Gerbera amarilla";
+    f.appendChild(img);
+    const tallo=document.createElement("div");
+    tallo.className="tallo";
+    f.appendChild(tallo);
+    c.appendChild(f);
+  }
+}
+
+function crearCorazones(){
+  setInterval(()=>{
+    const h=document.createElement("div");
+    h.className="corazon";
+    h.textContent=Math.random()>.45?"💛":"♡";
+    h.style.left=Math.random()*100+"%";
+    h.style.fontSize=(12+Math.random()*17)+"px";
+    h.style.animationDuration=(5+Math.random()*4)+"s";
+    document.body.appendChild(h);
+    setTimeout(()=>h.remove(),9000);
+  },850);
+}
+
+function mostrarCarta(){
+  document.getElementById("carta").classList.toggle("visible");
+}
+
+function toggleAudio(){
+  const a=document.getElementById("audio");
+  const b=document.getElementById("audioBtn");
+  if(a.paused){a.play();b.textContent="⏸️ Pausar";document.getElementById("estado").textContent="🎵 Reproduciendo Hermoso Cariño";}
+  else{a.pause();b.textContent="▶️ Continuar";document.getElementById("estado").textContent="⏸️ Música pausada";}
+}
+</script>
+</body>
+</html>
